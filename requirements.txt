@@ -1,0 +1,6 @@
+faster-whisper>=1.2
+PyAudioWPatch>=0.2.12
+numpy
+requests
+nvidia-cublas-cu12
+nvidia-cudnn-cu12==9.*
