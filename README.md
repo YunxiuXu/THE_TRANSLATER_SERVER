@@ -23,6 +23,7 @@ python -m venv .venv
 ## 踩过的坑（适配时注意）
 
 - **WASAPI loopback 必须在同一个线程里创建 PyAudio 和打开流**，否则报 `OSError -9999 Unanticipated host error`。只能捕获 Windows 默认播放设备，换设备要重启。
+- **远程桌面（RDP）会话里抓不到声音**：默认设备变成「远程音频」，它的 loopback 永远是静音（实测在它上面播放测试音，loopback 录到 0）。要在本机控制台会话里运行。
 - **CUDA DLL**：cuBLAS / cuDNN 来自 pip 包 `nvidia-cublas-cu12`、`nvidia-cudnn-cu12`，脚本开头用 `os.add_dll_directory` 加载，不需要单独装 CUDA Toolkit。
 - **Whisper 不能锁语言、不能喂前文 `initial_prompt`**：锁语言会在中途换语种时把英文"听"成日文；喂前文会让一次识别错误被无限复读。
 - **Whisper 在停顿处会乱加句号**：英文用"下一句大写开头"判断真句末，日文常不打「。」，改用 ます/です/ください 等句末形式切句（后接 が/けど/ので 的不切）。
